@@ -1,5 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-
+import Login from "./page/login";
 function access() {
   if (!localStorage.access_token) {
     return redirect("/login");
@@ -17,7 +17,7 @@ function cantBack() {
 const router = createBrowserRouter([
   {
     path: "/login",
-    element: <div>Login</div>,
+    element: <Login></Login>,
     loader: cantBack,
   },
   {
