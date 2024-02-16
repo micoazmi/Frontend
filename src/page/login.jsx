@@ -3,11 +3,11 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 export default function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     user: "",
     pass: "",
   });
-  console.log(form);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({
@@ -21,12 +21,12 @@ export default function Login() {
       const { data } = await axios({
         method: "post",
         url: "https://62.72.13.124/api/login",
-        data: {
-          user: "Dev_RegTest1",
-          pass: "123123",
-        },
+        data: form,
       });
       Swal.fire({ text: "Sukses login" });
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("userId", data.user?.id);
+      localStorage.setItem("name", data.user?.name);
     } catch (error) {
       console.log(error);
       Swal.fire({ text: "Username/password salah" });
@@ -89,6 +89,9 @@ export default function Login() {
             type="button"
             className="btn btn-success"
             style={{ width: "100%" }}
+            onClick={() => {
+              navigate("/register");
+            }}
           >
             Create New Account
           </button>
