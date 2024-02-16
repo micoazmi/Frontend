@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 export default function Login() {
   const [form, setForm] = useState({
     user: "",
@@ -12,7 +15,23 @@ export default function Login() {
       [name]: value,
     });
   };
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: "https://62.72.13.124/api/login",
+        data: {
+          user: "Dev_RegTest1",
+          pass: "123123",
+        },
+      });
+      Swal.fire({ text: "Sukses login" });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({ text: "Username/password salah" });
+    }
+  };
 
   return (
     <div
@@ -25,6 +44,7 @@ export default function Login() {
           padding: "20px",
           boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         }}
+        onSubmit={handleSubmit}
       >
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
