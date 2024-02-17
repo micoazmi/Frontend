@@ -48,7 +48,6 @@ export default function Navbar() {
             <li className="nav-item active">
               <a
                 className="nav-link"
-                href="#"
                 onClick={() => {
                   navigate("/home");
                 }}
@@ -59,7 +58,6 @@ export default function Navbar() {
             <li className="nav-item">
               <a
                 className="nav-link"
-                href="#"
                 onClick={() => {
                   navigate("/user");
                 }}

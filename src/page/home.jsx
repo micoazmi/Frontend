@@ -74,17 +74,9 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {notes?.notes?.map((el) => {
-                return (
-                  <>
-                    <TableNote
-                      key={el.note_id}
-                      el={el}
-                      Refetch={Refetch}
-                    ></TableNote>
-                  </>
-                );
-              })}
+              {notes?.notes?.map((el, i) => (
+                <TableNote key={i + 1} el={el} Refetch={Refetch}></TableNote>
+              ))}
             </tbody>
           </table>
         </div>

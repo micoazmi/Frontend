@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 export default function TableNote({ el, Refetch }) {
+  let key = 0;
   const navigate = useNavigate();
   const deleteNote = async () => {
     try {
@@ -20,7 +21,7 @@ export default function TableNote({ el, Refetch }) {
   };
   return (
     <>
-      <tr>
+      <tr key={el.note_id}>
         <td>{el.note_id}</td>
         <td>{el.note}</td>
         <td>{el.title}</td>

@@ -1,8 +1,10 @@
 import React from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function TableUser({ el, Refetch }) {
+  const navigate = useNavigate();
   const updated = el?.updated_at?.split("T")[0];
   const created = el?.created_at?.split("T")[0];
   const deleteUser = async () => {
@@ -21,7 +23,7 @@ export default function TableUser({ el, Refetch }) {
   };
   return (
     <>
-      <tr>
+      <tr key={el.id}>
         <td>{el.id}</td>
         <td>{el.name}</td>
         <td>{el.user}</td>
@@ -31,7 +33,16 @@ export default function TableUser({ el, Refetch }) {
           <button className="btn btn-danger" onClick={deleteUser}>
             Delete
           </button>
-          <button className="btn btn-secondary">Edit</button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => {
+              navigate("/editUser", {
+                state: { id: el.id, name: el.name, user: el.user },
+              });
+            }}
+          >
+            Edit
+          </button>
           <button className="btn btn-info">Detail</button>
         </td>
       </tr>
