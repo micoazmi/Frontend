@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import TableUser from "../components/tableUser";
 import axios from "axios";
+import TableOneUser from "../components/tableOneUser";
 export default function User() {
   const [Loading, setLoading] = useState(false);
   const [User, setUser] = useState({});
+  console.log(User, "<-------ini di halaman user");
   const getUser = async () => {
     try {
       setLoading(true);
@@ -42,6 +44,8 @@ export default function User() {
       </>
     );
   }
+  const updated = User?.user?.updated_at.split("T")[0];
+  const created = User?.user?.created_at.split("T")[0];
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={{ width: "80vw" }}>
@@ -56,13 +60,27 @@ export default function User() {
               <th scope="col">action</th>
             </tr>
           </thead>
-          <tbody>
-            {User?.users?.map((el) => {
-              return (
-                <TableUser key={el.id} el={el} Refetch={Refetch}></TableUser>
-              );
-            })}
-          </tbody>
+          {User.users ? (
+            <tbody>
+              {User?.users?.map((el) => {
+                return (
+                  <TableUser key={el.id} el={el} Refetch={Refetch}></TableUser>
+                );
+              })}
+            </tbody>
+          ) : (
+            <tbody>
+              <TableOneUser
+                key={User.user?.id}
+                id={User.user?.id}
+                name={User.user?.name}
+                user={User.user?.user}
+                created={created}
+                updated={updated}
+                Refetch={Refetch}
+              ></TableOneUser>
+            </tbody>
+          )}
         </table>
       </div>
     </div>

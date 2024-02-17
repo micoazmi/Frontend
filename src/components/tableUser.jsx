@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
 export default function TableUser({ el, Refetch }) {
+  console.log(el);
   const navigate = useNavigate();
   const updated = el?.updated_at?.split("T")[0];
   const created = el?.created_at?.split("T")[0];
