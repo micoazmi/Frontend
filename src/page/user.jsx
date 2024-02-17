@@ -23,6 +23,9 @@ export default function User() {
       }, 1000);
     }
   };
+  const Refetch = () => {
+    getUser();
+  };
   useEffect(() => {
     getUser();
   }, []);
@@ -55,7 +58,9 @@ export default function User() {
           </thead>
           <tbody>
             {User?.users?.map((el) => {
-              return <TableUser key={el.id} el={el}></TableUser>;
+              return (
+                <TableUser key={el.id} el={el} Refetch={Refetch}></TableUser>
+              );
             })}
           </tbody>
         </table>
