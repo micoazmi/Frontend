@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AddNotes() {
+  const location = useLocation();
   const navigate = useNavigate();
   const [form, setform] = useState({
-    note: "",
-    title: "",
+    note: location?.state?.note || "",
+    title: location?.state?.title || "",
   });
   console.log(form);
   const handleChange = (e) => {
@@ -36,10 +37,29 @@ export default function AddNotes() {
     }
   };
 
+  const editPost = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios({
+        method: "put",
+        url: `https://62.72.13.124/api/notes/${location.state.id}`,
+        data: form,
+        headers: {
+          Authorization: "Bearer " + localStorage.access_token,
+        },
+      });
+      Swal.fire({ text: "sukses Edit" });
+      navigate("/home");
+    } catch (error) {
+      console.log(error);
+      Swal.fire({ text: "gagal Edit" });
+    }
+  };
+
   return (
     <>
       <div>
-        <form onSubmit={newPost}>
+        <form onSubmit={location.state ? editPost : newPost}>
           <div class="d-flex flex-column">
             <div class="p-2">
               {" "}
@@ -47,6 +67,7 @@ export default function AddNotes() {
                 placeholder="Title"
                 name="title"
                 onChange={handleChange}
+                value={form.title}
               ></input>
             </div>
             <div class="p-2">
@@ -55,12 +76,13 @@ export default function AddNotes() {
                 placeholder="Note"
                 name="note"
                 onChange={handleChange}
+                value={form.note}
               ></input>
             </div>
             <div class="p-2">
               {" "}
               <button type="submit" className="btn btn-primary">
-                Submit
+                {location.state ? "Edit Notes" : "Add Notes"}
               </button>
             </div>
           </div>

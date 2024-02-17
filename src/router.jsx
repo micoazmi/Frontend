@@ -4,7 +4,7 @@ import Register from "./page/register";
 import Navbar from "./components/navbar";
 import Home from "./page/home";
 import AddNotes from "./page/addNotes";
-
+import Detail from "./page/detail";
 function access() {
   if (!localStorage.access_token) {
     return redirect("/login");
@@ -42,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "addNote",
         element: <AddNotes></AddNotes>,
+      },
+      {
+        path: "detail",
+        element: <Detail></Detail>,
       },
     ],
   },

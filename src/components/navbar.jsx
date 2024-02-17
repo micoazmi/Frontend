@@ -22,7 +22,13 @@ export default function Navbar() {
   };
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between p-2">
+      <nav
+        className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between p-2 mb-5"
+        style={{
+          boxShadow: "4px 4px 8px rgb(240, 240, 240)",
+          backgroundColor: "white",
+        }}
+      >
         <a className="navbar-brand " href="#">
           Navbar
         </a>
@@ -63,6 +69,7 @@ export default function Navbar() {
           </ul>
         </div>
       </nav>
+
       <Outlet />
     </>
   );

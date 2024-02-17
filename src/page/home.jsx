@@ -27,6 +27,10 @@ export default function Home() {
     }
   };
 
+  const Refetch = () => {
+    getNotes();
+  };
+
   useEffect(() => {
     getNotes();
   }, []);
@@ -45,36 +49,42 @@ export default function Home() {
   }
   return (
     <>
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          navigate("/addNote");
-        }}
-      >
-        {" "}
-        Add new note
-      </button>
-      <table class="table table-dark mt-5">
-        <thead>
-          <tr>
-            <th scope="col">note_id</th>
-            <th scope="col">note</th>
-            <th scope="col">title</th>
-            <th scope="col">user_id</th>
-            <th scope="col">user_name</th>
-            <th scope="col">action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {notes?.notes?.map((el, i) => {
-            return (
-              <>
-                <TableNote key={i} el={el}></TableNote>
-              </>
-            );
-          })}
-        </tbody>
-      </table>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <button
+            className="btn btn-primary"
+            onClick={() => {
+              navigate("/addNote");
+            }}
+          >
+            {" "}
+            Add new note
+          </button>
+        </div>
+        <div style={{ width: "80vw" }}>
+          <table className="table table-dark mt-5 mx-auto">
+            <thead>
+              <tr>
+                <th scope="col">note_id</th>
+                <th scope="col">note</th>
+                <th scope="col">title</th>
+                <th scope="col">user_id</th>
+                <th scope="col">user_name</th>
+                <th scope="col">action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {notes?.notes?.map((el, i) => {
+                return (
+                  <>
+                    <TableNote key={i} el={el} Refetch={Refetch}></TableNote>
+                  </>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 }
