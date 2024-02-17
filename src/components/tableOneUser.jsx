@@ -47,7 +47,18 @@ export default function TableOneUser({
         >
           Edit
         </button>
-        <button className="btn btn-info">Detail</button>
+        <button
+          className="btn btn-info"
+          onClick={() => {
+            navigate("/detailUser", {
+              state: {
+                id: id,
+              },
+            });
+          }}
+        >
+          Detail
+        </button>
       </td>
     </tr>
   );

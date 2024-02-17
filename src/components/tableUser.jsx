@@ -44,7 +44,18 @@ export default function TableUser({ el, Refetch }) {
           >
             Edit
           </button>
-          <button className="btn btn-info">Detail</button>
+          <button
+            className="btn btn-info"
+            onClick={() => {
+              navigate("/detailUser", {
+                state: {
+                  id: el.id,
+                },
+              });
+            }}
+          >
+            Detail
+          </button>
         </td>
       </tr>
     </>

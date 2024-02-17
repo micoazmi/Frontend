@@ -7,6 +7,7 @@ import AddNotes from "./page/addNotes";
 import Detail from "./page/detail";
 import User from "./page/user";
 import EditUser from "./page/editUser";
+import DetailUser from "./page/detailUser";
 function access() {
   if (!localStorage.access_token) {
     return redirect("/login");
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path: "editUser",
         element: <EditUser></EditUser>,
+      },
+      {
+        path: "detailUser",
+        element: <DetailUser></DetailUser>,
       },
     ],
   },
