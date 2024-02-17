@@ -48,7 +48,8 @@ export default function Register() {
           style={{
             width: "300px",
             padding: "20px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            boxShadow: "4px 4px 8px rgb(240, 240, 240)",
+            backgroundColor: "white",
           }}
           onSubmit={handleSubmit}
         >
@@ -82,7 +83,16 @@ export default function Register() {
               onChange={handleChange}
             />
           </div>
-
+          <div className="mb-3">
+            <a
+              href="#forgotPassword"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Already have account?
+            </a>
+          </div>
           <hr />
           <div className="mb-3">
             <button

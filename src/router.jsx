@@ -3,6 +3,7 @@ import Login from "./page/login";
 import Register from "./page/register";
 import Navbar from "./components/navbar";
 import Home from "./page/home";
+import AddNotes from "./page/addNotes";
 
 function access() {
   if (!localStorage.access_token) {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "home",
         element: <Home></Home>,
+      },
+      {
+        path: "addNote",
+        element: <AddNotes></AddNotes>,
       },
     ],
   },

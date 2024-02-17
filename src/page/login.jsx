@@ -37,14 +37,15 @@ export default function Login() {
 
   return (
     <div
-      className="d-flex justify-content-center align-items-center"
+      className="d-flex justify-content-center align-items-center "
       style={{ minHeight: "100vh" }}
     >
       <form
         style={{
           width: "300px",
           padding: "20px",
-          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          boxShadow: "4px 4px 8px rgb(240, 240, 240)",
+          backgroundColor: "white",
         }}
         onSubmit={handleSubmit}
       >
@@ -81,9 +82,6 @@ export default function Login() {
           >
             Log In
           </button>
-        </div>
-        <div className="mb-3">
-          <a href="#forgotPassword">Forgot Password?</a>
         </div>
         <hr />
         <div className="mb-3">

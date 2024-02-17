@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const Logout = async () => {
+    try {
+      const { data } = await axios({
+        method: "post",
+        url: "https://62.72.13.124/api/logout",
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      });
+      localStorage.clear();
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between p-2">
@@ -23,7 +40,13 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
+              <a
+                className="nav-link"
+                href="#"
+                onClick={() => {
+                  navigate("/home");
+                }}
+              >
                 Notes
               </a>
             </li>
@@ -33,7 +56,7 @@ export default function Navbar() {
               </a>
             </li>
             <li className="nav-item " style={{ marginLeft: "80vw" }}>
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="#" onClick={Logout}>
                 Logout
               </a>
             </li>
