@@ -1,6 +1,8 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
 import Login from "./page/login";
 import Register from "./page/register";
+import Navbar from "./components/navbar";
+import Home from "./page/home";
 
 function access() {
   if (!localStorage.access_token) {
@@ -29,8 +31,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Navbar></Navbar>,
     loader: access,
+    children: [
+      {
+        path: "home",
+        element: <Home></Home>,
+      },
+    ],
   },
 ]);
 

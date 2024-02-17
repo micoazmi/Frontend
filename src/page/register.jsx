@@ -10,6 +10,7 @@ export default function Register() {
     name: "",
     pass: "",
   });
+  console.log(form);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({
@@ -22,9 +23,15 @@ export default function Register() {
     try {
       const { data } = await axios({
         method: "post",
-        url: "https://62.72.13.124/api/login",
-        data: form,
+        url: "https://62.72.13.124/api/register",
+        data: {
+          name: form.name,
+          user: form.user,
+          pass: form.pass,
+        },
       });
+      navigate("/login");
+      console.log(data, "<-----------");
       Swal.fire({ text: "Sukses Register" });
     } catch (error) {
       console.log(error);
@@ -43,51 +50,45 @@ export default function Register() {
             padding: "20px",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
           }}
+          onSubmit={handleSubmit}
         >
           <h1>Sign Up</h1>
           <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Username
-            </label>
+            <label className="form-label">Username</label>
             <input
               type="text"
               name="user"
               className="form-control"
-              id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              onChange={handleChange}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Name
-            </label>
+            <label className="form-label">Name</label>
             <input
               type="text"
               name="name"
               className="form-control"
-              id="exampleInputEmail1"
               aria-describedby="emailHelp"
+              onChange={handleChange}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
+            <label className="form-label">Password</label>
             <input
               type="password"
               name="pass"
               className="form-control"
-              id="exampleInputPassword1"
+              onChange={handleChange}
             />
           </div>
 
           <hr />
           <div className="mb-3">
             <button
-              type="button"
+              type="submit"
               className="btn btn-success"
               style={{ width: "100%" }}
-              onClick={() => {}}
             >
               Create New Account
             </button>

@@ -23,10 +23,12 @@ export default function Login() {
         url: "https://62.72.13.124/api/login",
         data: form,
       });
-      Swal.fire({ text: "Sukses login" });
+      console.log(data);
       localStorage.setItem("access_token", data.access_token);
-      localStorage.setItem("userId", data.user?.id);
-      localStorage.setItem("name", data.user?.name);
+      localStorage.setItem("name", data.user.name);
+      localStorage.setItem("user", data.user.user);
+      navigate("/home");
+      Swal.fire({ text: "Sukses Login" });
     } catch (error) {
       console.log(error);
       Swal.fire({ text: "Username/password salah" });
